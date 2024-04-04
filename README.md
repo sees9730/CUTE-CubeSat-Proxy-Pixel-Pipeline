@@ -6,21 +6,6 @@ The pipeline turns an image like the one on the left, to one that looks like the
 <p align="center">
   <img src="ReadME Images/Overview_Results.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
-
-# Table of Contents
-
-- [Overview](#Overview)
-- [Instructions](#Instructions)
-- [Proxy Pixel Matching](#proxy-pixel-matching)
-  + [Pixel Types](#Pixel-Types)
-  + [Proxy Pixel Matching Methods](#Proxy-Pixel-Matching-Methods)
-    + [Median Method](#Median-Method)
-    + [LSQ Method](#LSQ-Method)
-- [Frames Creation](#Frames-Creation)
-- [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting)
-- [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting)
-- [Infill Final Frames](#Infill-Final-Frames)
-
 # Overview
 
 To understand our problem, consider this analogy:
