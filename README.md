@@ -25,7 +25,7 @@ The pipeline turns an image like the one on the left, to one that looks like the
 
 To understand our problem, consider this analogy:
 
-> Say you took pictures of a really faint object (we call these `Science Frame`s). However, these images have a lot of noise due to multiple factors like scattered light, the temperature of the camera, etc., meaning that the actual brightness of the object is being misrepresented. To get rid of the background noise in the images and discover the true brightness of the object, because you are really smart, you decide to take some pictures with that same camera inside a pitch-dark room (we call these `Dark Frame`s) to see if you can use this information to then clean up your bright object image.
+> Say you took pictures of a really faint object (we call these `Science Frames`). However, these images have a lot of noise due to multiple factors like scattered light, the temperature of the camera, etc., meaning that the actual brightness of the object is being misrepresented. To get rid of the background noise in the images and discover the true brightness of the object, because you are really smart, you decide to take some pictures with that same camera inside a pitch-dark room (we call these `Dark Frames`) to see if you can use this information to then clean up your bright object image.
 
 To connect the terminology used in the example to the actual use case:
 
