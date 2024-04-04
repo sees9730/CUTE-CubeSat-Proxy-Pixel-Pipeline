@@ -70,7 +70,9 @@ flowchart TD;
 ```
 # Instructions
 
-To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section. 
+To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section. Within the 5 files, there are two categories of files:
+- Files that should be run using parallel computing
+- Files that should be run using sequential computing
 
 ## Parallel Computing Files
 
