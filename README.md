@@ -6,6 +6,7 @@ The pipeline turns an image like the one on the left, to one that looks like the
 <p align="center">
   <img src="ReadME Images/Overview_Results.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
+
 # Overview
 
 To understand our problem, consider this analogy:
