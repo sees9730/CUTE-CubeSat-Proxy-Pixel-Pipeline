@@ -104,6 +104,10 @@ py .\4_Final_Frame_Fitting.py
 py .\5_Infill_Final_Frames.py
 ```
 
+## Logistics 
+Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
+
+
 > [!NOTE]
 > Out of the three files, 4_Final_Frame_Fitting.py takes the longest to run due to its complexity. 
 
