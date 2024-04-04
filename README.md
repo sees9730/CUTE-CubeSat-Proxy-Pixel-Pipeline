@@ -72,6 +72,8 @@ flowchart TD;
 
 To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section. 
 
+## Parallel Computing Files
+
 > [!IMPORTANT]
 > The `1_Proxy_Matches.py` and the `2_Frame_Creations.py` file are intended to be run using MPI4PY to include parallel programming which will reduce the running timing of the codes.
 
@@ -89,6 +91,8 @@ mpiexec -n 4 py .\2_Frame_Creations.py
 
 > [!NOTE]
 > n is the number of processors you want to run the code with. The higher the number of processors, the faster the code will run.
+
+## Sequential Computing Files
 
 You can/should run `3_Median_Frame_Fitting.py`, `4_Final_Frame_Fitting.py`, and `5_Infill_Final_Frames.py` like you would any other Python file i.e.
 
