@@ -133,6 +133,9 @@ The code is hardcoded to clean up the Science Frames that were taken of the exop
 
 Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
 
+> [!NOTE]
+> The results shown in the readME are the ones provided in the [Results folder](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/tree/master/Results). 
+
 
 
 
