@@ -34,7 +34,7 @@ To connect the terminology used in the example to the actual use case:
 - Dark Frames = Stills of an arbitrary, dark location in the night sky
 
 To tackle this issue, we created this pipeline which is composed of 5 steps:
-1. [Proxy Pixel Matching](#proxy-pixel-matching) (Code 1)
+1. [Proxy Pixel Matching](#proxy-pixel-matching) ([1_Proxy_Matches.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/main/1_Proxy_Matches.py)
    - We find behavioral patterns within pixels
 2. [Frames Creations](#Frames-Creation) (Code 2)
    - Given the patterns in the pixels, we create a Background Frame and then subtract it from the Science Frame, giving the resulting Final Frames
