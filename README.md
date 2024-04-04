@@ -119,18 +119,17 @@ The main libraries used in the pipeline are:
 
 ## Example Files
 
-The code is hardcoded to clean up the Science Frames that were taken of the exoplanet transit of [WASP-189b](https://exoplanets.nasa.gov/exoplanet-catalog/8464/wasp-189-b/). The file [`WASP189b_Sc_Frames.pbz2`](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Data_Files/WASP189b_Sc_Frames.pbz2) contains all of the Science Frames spanning 9 visits at various times. Each of the visits includes a certain number of Frames as shown below:
-- TARGET	VISIT	FRMST	FRMED
-- WASP-189b	1	358	408
-- WASP-189b	2	409	462
-- WASP-189b	3	467	529
-- WASP-189b	4	530	608
-- WASP-189b	5	609	699
-- WASP-189b	6	700	838
-- WASP-189b	7	839	979
-- WASP-189b	8	1083	1225
-- WASP-189b	9	1227	1399
+The code is hardcoded to clean up the Science Frames that were taken of the exoplanet transit of [WASP-189b](https://exoplanets.nasa.gov/exoplanet-catalog/8464/wasp-189-b/). The file [`WASP189b_Sc_Frames.pbz2`](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Data_Files/WASP189b_Sc_Frames.pbz2) contains all of the Science Frames spanning 9 visits at various times. Each of the visits includes a certain number of Frames described by their FrameIDs as shown below:
 
+- Visit 1 -> 358-408
+- Visit 2 -> 409-462
+- Visit 3 -> 467-529
+- Visit 4 -> 530-608
+- Visit 5 -> 609-699
+- Visit 6 -> 700-838
+- Visit 7 -> 839-979
+- Visit 8 -> 1083-1225
+- Visit 9 -> 1227-1399
 
 Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
 
