@@ -1,7 +1,5 @@
 import numpy as np 
 from scipy.optimize import curve_fit
-import matplotlib.pyplot as plt
-import pickle as pkl
 from Helper_Function.Helper import doubleGaussCurve, filterArray, readPickleFile, outputPickleFile
 
 def random_params_within_bounds(lower_bound, upper_bound):
