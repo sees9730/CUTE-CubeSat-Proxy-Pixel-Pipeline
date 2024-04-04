@@ -92,7 +92,7 @@ mpiexec -n 4 py .\2_Frame_Creations.py
 ```
 
 > [!NOTE]
-> n is the number of processors you want to run the code with. The higher the number of processors, the faster the code will run.
+> Here, 4 is the number of processors you want to run the code with. The higher the number of processors, the faster the code will run.
 
 ## Sequential Computing Files
 
@@ -105,6 +105,19 @@ py .\5_Infill_Final_Frames.py
 ```
 
 ## Logistics 
+
+The main libraries used in the pipeline:
+
+- [Numpy](https://numpy.org/) (For computations)
+- [Matplotlib](https://matplotlib.org/) (For lotting)
+- [Scipy](https://scipy.org/) (For gaussian fitting)
+- [Lacosmic](https://lacosmic.readthedocs.io/en/stable/) (For removing cosmic rays in the Final Frames)
+- [MPI4PY](https://pypi.org/project/mpi4py/) (For parallel computing files)
+- [bz2](https://docs.python.org/3/library/bz2.html) (For file reading and writing)
+- [csv](https://docs.python.org/3/library/csv.html) (For file reading)
+- [pickle](https://docs.python.org/3/library/pickle.html) (For file reading and writing)
+
+
 Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
 
 
