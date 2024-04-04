@@ -70,7 +70,10 @@ flowchart TD;
 ```
 # Instructions
 
-To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section.
+To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section. 
+
+> [!IMPORTANT]
+> The 1_Proxy_Matches.py file is intended to be ran using MPI4PY to include parallel programming which will reduce the running timing of the code. 
 
 
 
