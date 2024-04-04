@@ -104,9 +104,9 @@ py .\4_Final_Frame_Fitting.py
 py .\5_Infill_Final_Frames.py
 ```
 
-## Logistics 
+## Libraries
 
-The main libraries used in the pipeline:
+The main libraries used in the pipeline are:
 
 - [Numpy](https://numpy.org/) (For computations)
 - [Matplotlib](https://matplotlib.org/) (For lotting)
@@ -117,8 +117,14 @@ The main libraries used in the pipeline:
 - [csv](https://docs.python.org/3/library/csv.html) (For file reading)
 - [pickle](https://docs.python.org/3/library/pickle.html) (For file reading and writing)
 
+## Example Files
+
+The code is hardcoded to clean up the Science Frames that were taken of the exoplanet transit of [WASP-189b](https://exoplanets.nasa.gov/exoplanet-catalog/8464/wasp-189-b/). The file [`WASP189b_Sc_Frames.pbz2`](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Data_Files/WASP189b_Sc_Frames.pbz2) contains all of the Science Frames, 
+
 
 Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
+
+
 
 
 > [!NOTE]
