@@ -40,7 +40,7 @@ To tackle this issue, we created this pipeline which is composed of 5 steps:
    - Given the patterns in the pixels, we create a Background Frame and then subtract it from the Science Frame, giving the resulting Final Frames
 3. [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting) (Code : [3_Median_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/3_Median_Frame_Fitting.py))
    - We created a Median Frame from the Science Frames and fit multiple Gauss curve fits to its columns
-4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code : [4_Final_Frame_Fitting](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/4_Final_Frame_Fitting.py))
+4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code : [4_Final_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/4_Final_Frame_Fitting.py))
    - Given the Final Frames, we fit multiple Gauss curve fits to their columns with the help of the Median Frame Fits
 5. [Infill Final Frames](#Infill-Final-Frames) (Code : [5_Infill_Final_Frames.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/5_Infill_Final_Frames.py))
    - We use the Final Frame fits to infill the Final Frames and we then remove the cosmic rays using lacosmic  
@@ -49,21 +49,21 @@ See below for a comprehensive flowchart that shows which steps are included in w
 
 ```mermaid
 flowchart TD;
-    subgraph Code1
+    subgraph 1_Proxy_Matches.py
     A[Dark Frames] --> B[Proxy Pixel Matching];
     end
-    subgraph Code2
+    subgraph 2_Frame_Creations.py
     B --> C[Background Frames];
     C & D[Science Frames] --> E[Final Frames, No Infill];
     end
-    subgraph Code3
+    subgraph 3_Median_Frame_Fitting.py
     D --> F[Median Frame Fits]
     end
-    subgraph Code4
+    subgraph 4_Final_Frame_Fitting.py
     E & F --> G[Final Frames Fits];
     end
     E & G --> H[Final Frames, Infilled];
-    subgraph Code5
+    subgraph 5_Infill_Final_Frames.py
     H --> I[Cosmic Ray Removal]
     I --> J[Final Frames];
     end
