@@ -38,11 +38,11 @@ To tackle this issue, we created this pipeline which is composed of 5 steps:
    - We find behavioral patterns within pixels
 2. [Frames Creations](#Frames-Creation) (Code : [2_Frame_Creations.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/2_Frame_Creations.py))
    - Given the patterns in the pixels, we create a Background Frame and then subtract it from the Science Frame, giving the resulting Final Frames
-3. [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting) ()
+3. [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting) (Code : [3_Median_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/3_Median_Frame_Fitting.py))
    - We created a Median Frame from the Science Frames and fit multiple Gauss curve fits to its columns
-4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code 4)
+4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code : [4_Final_Frame_Fitting](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/4_Final_Frame_Fitting.py))
    - Given the Final Frames, we fit multiple Gauss curve fits to their columns with the help of the Median Frame Fits
-5. [Infill Final Frames](#Infill-Final-Frames) (Code 5)
+5. [Infill Final Frames](#Infill-Final-Frames) (Code : [5_Infill_Final_Frames.py]())
    - We use the Final Frame fits to infill the Final Frames and we then remove the cosmic rays using lacosmic  
 
 See below for a comprehensive flowchart that shows which steps are included in which code files.
