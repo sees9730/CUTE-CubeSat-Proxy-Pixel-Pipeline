@@ -90,7 +90,13 @@ mpiexec -n 4 py .\2_Frame_Creations.py
 > [!NOTE]
 > n is the number of processors you want to run the code with. The higher the number of processors, the faster the code will run.
 
-You can/should run `3_Median_Frame_Fitting.py`, `4_Final_Frame_Fitting.py`, and `5_Infill_Final_Frames.py` like you would any other python file. 
+You can/should run `3_Median_Frame_Fitting.py`, `4_Final_Frame_Fitting.py`, and `5_Infill_Final_Frames.py` like you would any other Python file i.e.
+
+```
+py .\3_Median_Frame_Fitting.py
+py .\4_Final_Frame_Fitting.py
+py .\5_Infill_Final_Frames.py
+```
 
 > [!IMPORTANT]
 > Out of the three files, 4_Final_Frame_Fitting.py takes the longest to run due to its complexity. 
