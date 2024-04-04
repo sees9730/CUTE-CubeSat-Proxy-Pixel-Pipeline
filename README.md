@@ -1,5 +1,5 @@
 # CUTE CubeSat Proxy Pixel Pipeline
-The Proxy Pixel Pipeline is an image-processing pipeline developed by Sebastian Escobar and the Colorado Ultraviolet Transit Experiment (CUTE) Team. This pipeline focuses on the image background reduction of the spectral images taken by the CUTE CubeSat with the purpose of extracting the spectral signal of the observed exoplanet.
+The Proxy Pixel Pipeline is an image-processing pipeline developed by Sebastian Escobar and the Colorado Ultraviolet Transit Experiment (CUTE) Team at the University of Colorado Boulder. This pipeline focuses on the image background reduction of the spectral images taken by the CUTE CubeSat with the purpose of extracting the spectral signal of the observed exoplanet.
 
 The pipeline turns an image like the one on the left, to one that looks like the one on the right.
 
