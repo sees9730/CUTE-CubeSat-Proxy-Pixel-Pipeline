@@ -102,7 +102,7 @@ py .\4_Final_Frame_Fitting.py
 py .\5_Infill_Final_Frames.py
 ```
 
-> [!IMPORTANT]
+> [!NOTE]
 > Out of the three files, 4_Final_Frame_Fitting.py takes the longest to run due to its complexity. 
 
 
