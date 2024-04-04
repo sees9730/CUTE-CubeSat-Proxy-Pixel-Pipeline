@@ -73,24 +73,26 @@ flowchart TD;
 To simplify the pipeline and make it easier to debug, the pipeline consists of 5 files. Each file corresponds to one of the steps mentioned in the [Overview](#Overview) section. 
 
 > [!IMPORTANT]
-> The 1_Proxy_Matches.py file is intended to be ran using MPI4PY to include parallel programming which will reduce the running timing of the code. 
+> The `1_Proxy_Matches.py` and the `2_Frame_Creations.py` file are intended to be run using MPI4PY to include parallel programming which will reduce the running timing of the codes.
 
-
-
-To run the first code, enter the following line in the command window (this assumes that you have setup the MPI4PY HELP python library):
+To run 1_Proxy_Matyches.py, enter the following line in the command window (this assumes that you have set the [MPI4PY](https://pypi.org/project/mpi4py/) python library):
 
 ```
 mpiexec -n 4 py .\1_Proxy_Matches.py
 ```
 
-To run the second code, enter the following in the command window:
+To run 2_Frame_Creations.py, enter the following in the command window:
 
 ```
-mpiexec -n 4 py .\2_Frames.py
+mpiexec -n 4 py .\2_Frame_Creations.py
 ```
 
 > [!NOTE]
 > n is the number of processors you want to run the code with. The higher the number of processors, the faster the code will run.
+
+> [!IMPORTANT]
+> You can/should run `3_Median_Frame_Fitting.py`, `4_Final_Frame_Fitting.py`, and `5_Infill_Final_Frames.py` like you would any other python file. Out of the three files, 4_Final_Frame_Fitting.py takes the longest to run due to its complexity. 
+
 
 
 # Proxy Pixel Matching
