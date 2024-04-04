@@ -131,18 +131,13 @@ The code is hardcoded to clean up the Science Frames that were taken of the exop
 - Visit 8 -> 1083-1225
 - Visit 9 -> 1227-1399
 
+> [!IMPORTANT]
+> The pipeline is hard-coded to fix the Science Frames from Visit 5. 
+
 Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
 
 > [!NOTE]
 > The results shown in the readME are the ones provided in the [Results folder](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/tree/master/Results). 
-
-
-
-
-> [!NOTE]
-> Out of the three files, 4_Final_Frame_Fitting.py takes the longest to run due to its complexity. 
-
-
 
 # Proxy Pixel Matching
 The basis of this pipeline is to eliminate the background noise in every spectral image taken of an exoplanet mid-transit. To do this, we employ a pattern-finding technique that we call `Proxy Pixel Matching` to eliminate the background noise based on the expected noise value of certain pixels.
