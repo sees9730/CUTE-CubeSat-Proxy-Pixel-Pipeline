@@ -167,7 +167,7 @@ Below is a graph that shows two proxy pixels, one spectral and the other non-spe
 The LSQ Method stands for 'Least Squares Method'. When using this method, we first take the residuals between a single spectral pixel and all of the non-spectral pixels. Then, we square every value in the residuals array and then sum all of the numbers. This way every comparison made between spectral and non-spectral pixels will have its own 'LSQ' value. We then normalize all of the LSQ values based on the number of values used when comparing the pixels and pick the comparison with the smallest normalized LSQ value.
 
 > [!NOTE]
-> The Proxy_Matches.py file has the Median Method as a default. However, the LSQ Method is commented out in lines HELP if you decide to use this method.  
+> The Proxy_Matches.py file has the Median Method as a default. However, the LSQ Method is commented out in lines 153-155 if you decide to use this method.  
 
 # Frames Creation
 Since the Dark Frames are stills of an arbitrary point in the night sky, we can confidently say that every pixel's value is mostly influenced by the noise of the CCD and other factors. We often call the values in the Dark Frames, 'dark noise values'. Thus, by finding the proxy pixel matches in the dark frames, we can say that the dark noise of pixel A is the same or similar to pixel B. Since our goal is to eliminate the underlying noise in the Science Frames, we create a `Background Frame` that can then be subtracted from the Science Frame. To create a Background Frame, we:
@@ -258,7 +258,7 @@ We decided to infill all of the pixels that had a pixel value lower than 0 (due 
 
 We can see how much better the Final Frames look like after this infill. However, there was an underlying issue that was apparent in all of the Final Frames: cosmic rays.
 
-So far, the pipeline had not concerned itself with cosmic rays. However, now that we had a Final Frame with a value for every pixel, we could take care of the cosmic rays in the image. To do this, we decided to use the lacosmic python library (HELP link to lacosmic). This algorithm not only cleared the image of any cosmic rays, but it also got rid of any possible outliers the pipeline might have caused. For this reason, this step was the last step of the pipeline, giving Final Frames that look like the one below. 
+So far, the pipeline had not concerned itself with cosmic rays. However, now that we had a Final Frame with a value for every pixel, we could take care of the cosmic rays in the image. To do this, we decided to use the [lacosmic](https://pypi.org/project/lacosmic/) Python library. This algorithm not only cleared the image of any cosmic rays, but it also got rid of any possible outliers the pipeline might have caused. For this reason, this step was the last step of the pipeline, giving Final Frames that look like the one below. 
 
 <p align="center">
   <img src="ReadME Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
