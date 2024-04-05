@@ -293,3 +293,7 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
 <p align="center">
   <img src="ReadME Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
 </p>
+
+## Credits
+Created by: sebastian.escobar@colorado.edu
+With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
