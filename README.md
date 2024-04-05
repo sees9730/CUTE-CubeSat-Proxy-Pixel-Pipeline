@@ -20,6 +20,7 @@ In short, the pipeline turns an image like the one on the left, to one that look
 - [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting)
 - [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting)
 - [Infill Final Frames](#Infill-Final-Frames)
+- [Credits](#Credits)
 
 # Overview
 
@@ -295,5 +296,5 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
 </p>
 
 ## Credits
-Created by: sebastian.escobar@colorado.edu
-With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
+- Created by: sebastian.escobar@colorado.edu
+- With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
