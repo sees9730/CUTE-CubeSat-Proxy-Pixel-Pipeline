@@ -157,6 +157,9 @@ As the name suggests, spectral pixels are the ones that are spatially located in
   <img src="ReadME Images/Spectral_vs_NonSpectral_Pixels.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
 
+> [!IMPORTANT]
+> The green color in the boundary of the two sections is a visual artifact. The image only contains the colors yellow (for spectral pixels) and purple (for non-spectral pixels).
+
 Given that the expected value of spectral pixels is higher than that of the non-spectral pixels, finding a proxy pixel match between them is highly improbable *in Science Frames*. For this reason, we decided to find proxy pixel matches using Dark Frames. This way, we can `use all of the Dark Frames to find proxy pixel matches between spectral and non-spectral pixels, with the goal of having a match for every single spectral pixel`. 
 
 Below is a comprehensive image that explains what a proxy pixel match looks like. Notice how every spectral pixel in the image has a proxy non-spectral pixel.
