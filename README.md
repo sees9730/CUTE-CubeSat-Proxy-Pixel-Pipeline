@@ -302,5 +302,5 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
 </p>
 
 ## Credits
-- Created by: sebastian.escobar@colorado.edu
+- Created by: [Sebastian Escobar](sebastian.escobar@colorado.edu)
 - With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
