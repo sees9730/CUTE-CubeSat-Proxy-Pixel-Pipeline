@@ -235,6 +235,9 @@ Below is what an actual Science, Dark, Background, and Final Frame look like.
   <img src="ReadME Images/Final_Frame_Before_Infill_Combined.png" alt = "Final Frame before infill."/>
 </p>
 
+> [!IMPORTANT]
+> The abundance of white pixels in the images (which corresponds to empty pixels) is a visual artifact. When we take a close look at the images, we can see that the number of empty pixels is not as many as they appear to be in the zoomed-out version of the images.
+
 The reason for the empty pixels (the white pixels in the actual images) is due to the fact that we excluded hot pixels and unavailable pixels from the proxy pixel matching algorithm. Hot pixels are described as pixels that have an abnormally high value throughout every single frame. An unavailable pixel is usually due to a poor frame downlink in which the pixel value was never obtained. 
 
 ## Median Frame Gaussian Fitting
