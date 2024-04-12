@@ -20,6 +20,7 @@ In short, the pipeline turns an image like the one on the left, to one that look
 - [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting)
 - [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting)
 - [Infill Final Frames](#Infill-Final-Frames)
+- [Credits](#Credits)
 
 # Overview
 
@@ -156,6 +157,9 @@ As the name suggests, spectral pixels are the ones that are spatially located in
   <img src="ReadME Images/Spectral_vs_NonSpectral_Pixels.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
 
+> [!IMPORTANT]
+> The green color in the boundary of the two sections is a visual artifact. The image only contains the colors yellow (for spectral pixels) and purple (for non-spectral pixels).
+
 Given that the expected value of spectral pixels is higher than that of the non-spectral pixels, finding a proxy pixel match between them is highly improbable *in Science Frames*. For this reason, we decided to find proxy pixel matches using Dark Frames. This way, we can `use all of the Dark Frames to find proxy pixel matches between spectral and non-spectral pixels, with the goal of having a match for every single spectral pixel`. 
 
 Below is a comprehensive image that explains what a proxy pixel match looks like. Notice how every spectral pixel in the image has a proxy non-spectral pixel.
@@ -231,6 +235,9 @@ Below is what an actual Science, Dark, Background, and Final Frame look like.
   <img src="ReadME Images/Final_Frame_Before_Infill_Combined.png" alt = "Final Frame before infill."/>
 </p>
 
+> [!IMPORTANT]
+> The abundance of white pixels in the images (which corresponds to empty pixels) is a visual artifact. When we take a close look at the images, we can see that the number of empty pixels is not as many as they appear to be in the zoomed-out version of the images.
+
 The reason for the empty pixels (the white pixels in the actual images) is due to the fact that we excluded hot pixels and unavailable pixels from the proxy pixel matching algorithm. Hot pixels are described as pixels that have an abnormally high value throughout every single frame. An unavailable pixel is usually due to a poor frame downlink in which the pixel value was never obtained. 
 
 ## Median Frame Gaussian Fitting
@@ -293,3 +300,7 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
 <p align="center">
   <img src="ReadME Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
 </p>
+
+## Credits
+- Created by: [Sebastian Escobar](https://www.linkedin.com/in/sebastianescobar03/)
+- With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
