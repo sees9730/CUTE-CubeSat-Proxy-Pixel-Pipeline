@@ -1,119 +1,85 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'CUTE CubeSat Proxy Pixel Pipeline'
 tags:
   - Python
   - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
-authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0000-0000-0001
-    equal-contrib: true
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
-  - name: Author with no affiliation
-    corresponding: true # (This is how to denote the corresponding author)
-    affiliation: 3
-  - given-names: Ludwig
-    dropping-particle: van
-    surname: Beethoven
-    affiliation: 3
-affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University, USA
-   index: 1
- - name: Institution Name, Country
-   index: 2
- - name: Independent Researcher, Country
-   index: 3
-date: 13 August 2017
-bibliography: draft.bib
+  - exoplanets
+  - algorithms
+  - image processing
+  - pipepline
 
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
+authors:
+  - name: Sebastian Escobar
+    orcid: 0009-0003-3830-6945
+    equal-contrib: true
+    affiliation: "1, 2" 
+  - name: Arika Egan
+    orcid: 0000-0002-4701-8916
+    equal-contrib: false
+    affiliation: 3
+  - name: Kevin France
+    orcid: 0000-0002-1002-3674
+    equal-contrib: false
+    affiliation: "1, 2"
+  - name: Dolon Bhattacharyya
+    orcid: 0000-0003-1375-7101
+    equal-contrib: false
+    affiliation: 2
+
+affiliations:
+ - name: University of Colorado Boulder
+   index: 1
+ - name: Laboratory for Atmospheric and Space Physics
+   index: 2
+ - name: Johns Hopkins University
+   index: 3
+
+date: 11 April 2024
+
+bibliography: references.bib
 ---
 
 # Summary
+The CUTE CubeSat mission captures near ultraviolet (NUV) spectral images from various exoplanets as it orbits Earth. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc., which can often be challenging to account for. The `CUTE CubeSat Proxy Pixel Pipeline` was developed specifically to address the challenge of background noise in the spectral images of the exoplanets observed by CUTE. 
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+The process involves finding "Proxy Pixel Matches" (pixels with similar behaviors across every image) to predict the behavior of the percentage of a pixel value that is noise-induced. Further polishing of the images is done by infilling the images based on certain patterns seen in the images (Gaussian Fitting) as well as eliminating the cosmic rays that infiltrate the image (done with the Python package lacosmic [@2001PASP..113.1420V]).  
+
+The methodology incorporates both parallel and sequential computing techniques to optimize processing time and efficiency. The pipeline is made up of five files to facilitate debugging and there are example inputs and outputs that serve as a guide to compare the results to.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+The Colorado Ultraviolet Transit Experiment (CUTE) is a 6U NASA CubeSat built by the Laboratory for Atmospheric and Space Physics (LASP). Its primary mission is to observe and take images of the evolving atmospheres on short-period exoplanets for which it utilizes its Near UltraViolet (NUV) wavelength telescope. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc. [@Egan_2023]. 
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+Multiple attempts have been made to try and eliminate the background from the images taken by CUTE, most notably the "The Autonomous Data Reduction Pipeline for the CUTE Mission" @[Sreejith_2022]. While this pipeline has the same overall objective, the main differences between it and the pipeline being presented [INFILL HERE]
 
-# Mathematics
+Various predictive algorithms and strategies were explored before arriving at this solution, most notably Gaussian Process Regression, and image-infilling techniques. The Gaussian Process Regression efforts proved unsuccessful due to the nature of the problem, while the image-infilling techniques provided insufficient reliability due to their neighboring pixel-based approach. The final result combines both solutions while tweaking each. 
 
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
+While the CUTE CubeSat Proxy Pixel Pipeline was initially intended to process the CUTE CubeSat images, there is hope that the software proves useful to other scientific teams that have the need to eliminate background noise from their images.  
 
-Double dollars make self-standing equations:
 
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
+# Main Structure and Methodology
+The pipeline is centered around the idea of finding Proxy Pixels in the Dark Frames to then use them to subtract the background noise from Science Frames. To continue the discussion, we present the definition of the three terms. 
 
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
+- Dark Frames are images that were taken while the charged coupled device (CCD) was pointed at the void of space.
 
-# Citations
+- Science Frames are the opposite of Dark Frames. These are images that were taken when the CCD was pointed at a target exoplanet to extract its spectral [INFILL HERE]. 
 
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+- Proxy Pixels are pixels that exhibit similar behavior throughout multiple pictures.
 
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+First, we find Proxy Pixel Matches by looking at the Dark Frames. Since the Dark Frames are meant to characterize and expose the general background noise of the CCD's pixels, we can use the Proxy Pixel Matches to predict the overall noise value that a pixel might have in a Science Frame. As a side note, some of the pixels are taken out of the equation due to the fact that they always show the same value (we call these "Hot Pixels"). Furthermore, since the downlinking capabilities of the CUTE CubeSat are quite limited, we are often forced to downlink ~95% of an image instead of the full image. Regardless, we create "Background Frames" by utilizing the Proxy Pixel Matches to subtract the Background Frames from the Science Frames. 
 
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
+Once the background-corrected Science Frames (Final Frames) are created, there is still the issue of hot and non-downlinked pixels. To account for these empty pixels, we implement an infilling technique that takes into account the general (based on a "Median Frame") and the local (from the patterns in the Final Frames themselves) expected pixel value. 
 
-# Figures
+The last step in the pipeline is to eliminate all of the cosmic rays that might have infiltrated the image as well as smooth the imperfections generated by the pipeline. This is done with the Python package lacosmic.
 
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
+![Flowchart of the pipeline's structure. \autoref{fig:Flowchart}](./Images/Flowchart.png)
 
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+The flow and steps of the pipeline are shown in Figure ref{fig:Flowchart}. Furthermore, the pipeline is able to return results like the one in Figure \autoref{fig:Final Results}.
+
+![Final Frame Compared to a Science Frame. \label{fig:Final Results}](./Images/Overview_Results.png)
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+We acknowledge contributions from Arika Egan, Kevin France, Dolon Bhattacharyya, and Sreejith Gopinathan. Their guidance and knowledge were crucial in the making of this project.
 
 # References

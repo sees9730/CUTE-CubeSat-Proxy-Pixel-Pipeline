@@ -4,23 +4,29 @@ The Proxy Pixel Pipeline is an image-processing pipeline developed by Sebastian 
 In short, the pipeline turns an image like the one on the left, to one that looks like the one on the right.
 
 <p align="center">
-  <img src="ReadME Images/Overview_Results.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
+  <img src="Images/Overview_Results.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
 
 # Table of Contents
 
-- [Overview](#Overview)
-- [Instructions](#Instructions)
+- [CUTE CubeSat Proxy Pixel Pipeline](#cute-cubesat-proxy-pixel-pipeline)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Instructions](#instructions)
+  - [Parallel Computing Files](#parallel-computing-files)
+  - [Sequential Computing Files](#sequential-computing-files)
+  - [Libraries](#libraries)
+  - [Example Files](#example-files)
 - [Proxy Pixel Matching](#proxy-pixel-matching)
-  + [Pixel Types](#Pixel-Types)
-  + [Proxy Pixel Matching Methods](#Proxy-Pixel-Matching-Methods)
-    + [Median Method](#Median-Method)
-    + [LSQ Method](#LSQ-Method)
-- [Frames Creation](#Frames-Creation)
-- [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting)
-- [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting)
-- [Infill Final Frames](#Infill-Final-Frames)
-- [Credits](#Credits)
+  - [Pixel Types](#pixel-types)
+  - [Proxy Pixel Matching Methods](#proxy-pixel-matching-methods)
+    - [Median Method](#median-method)
+    - [LSQ Method](#lsq-method)
+- [Frames Creation](#frames-creation)
+  - [Median Frame Gaussian Fitting](#median-frame-gaussian-fitting)
+  - [Final Frames Gaussian Fitting](#final-frames-gaussian-fitting)
+  - [Infill Final Frames](#infill-final-frames)
+  - [Credits](#credits)
 
 # Overview
 
@@ -154,7 +160,7 @@ This pipeline was developed for the images produced by the CUTE CubeSat. For thi
 As the name suggests, spectral pixels are the ones that are spatially located in the CCD exactly where the spectral signal falls. Opposite to those, are the non-spectral pixels which are simply the ones that are not located where the spectral signal is. The figure below shows the spectral and non-spectral pixels in a sample image.
 
 <p align="center">
-  <img src="ReadME Images/Spectral_vs_NonSpectral_Pixels.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
+  <img src="Images/Spectral_vs_NonSpectral_Pixels.png" alt = "Image that shows the location of the spectral and non-spectral pixels across the CCD"/>
 </p>
 
 > [!IMPORTANT]
@@ -165,7 +171,7 @@ Given that the expected value of spectral pixels is higher than that of the non-
 Below is a comprehensive image that explains what a proxy pixel match looks like. Notice how every spectral pixel in the image has a proxy non-spectral pixel.
 
 <p align="center">
-  <img src="ReadME Images/Proxy_Match_Drawing.png" alt = "Image that shows what a proxy pixel match looks like"/>
+  <img src="Images/Proxy_Match_Drawing.png" alt = "Image that shows what a proxy pixel match looks like"/>
 </p>
 
 ## Proxy Pixel Matching Methods
@@ -186,15 +192,15 @@ Below is a graph that shows two proxy pixels, one spectral and the other non-spe
 
 
 <p align="center">
-  <img src="ReadME Images/Proxy_Match_Comparison.png" alt = "Comparison between two pixels which were determined to be proxy pixels."/>
+  <img src="Images/Proxy_Match_Comparison.png" alt = "Comparison between two pixels which were determined to be proxy pixels."/>
 </p>
 
 <p align="center">
-  <img src="ReadME Images/Proxy_Match_Comparison_Residuals.png" alt = "Residuals between two pixels which were determined to be proxy pixels."/>
+  <img src="Images/Proxy_Match_Comparison_Residuals.png" alt = "Residuals between two pixels which were determined to be proxy pixels."/>
 </p>
 
 <p align="center">
-  <img src="ReadME Images/Proxy_Match_Comparison_Residuals_Histogram.png" alt = "Histogram of residuals between two pixels which were determined to be proxy pixels."/>
+  <img src="Images/Proxy_Match_Comparison_Residuals_Histogram.png" alt = "Histogram of residuals between two pixels which were determined to be proxy pixels."/>
 </p>
 
 ### LSQ Method
@@ -214,25 +220,25 @@ Since the non-spectral pixels in a Science Frame have no spectral signal in them
 Below is a comprehensive image that showcases the logic behind the Background Frames and Final Frames creation.
 
 <p align="center">
-  <img src="ReadME Images/Final_And_Background_Frame_Drawing.png" alt = "Drawing that shows how the Background Frame and Final Frames are created"/>
+  <img src="Images/Final_And_Background_Frame_Drawing.png" alt = "Drawing that shows how the Background Frame and Final Frames are created"/>
 </p>
 
 Below is what an actual Science, Dark, Background, and Final Frame look like.
 
 <p align="center">
-  <img src="ReadME Images/Original_Science_Image_Pre_Infill_Combined.png" alt = "Original science image pre infill"/>
+  <img src="Images/Original_Science_Image_Pre_Infill_Combined.png" alt = "Original science image pre infill"/>
 </p>
 
 <p align="center">
-  <img src="ReadME Images/Dark_Frame_Combined.png" alt = "Final Frame before infill."/>
+  <img src="Images/Dark_Frame_Combined.png" alt = "Final Frame before infill."/>
 </p>
 
 <p align="center">
-  <img src="ReadME Images/Recreated_Back_Combined.png" alt = "Recreated background image combined."/>
+  <img src="Images/Recreated_Back_Combined.png" alt = "Recreated background image combined."/>
 </p>
 
 <p align="center">
-  <img src="ReadME Images/Final_Frame_Before_Infill_Combined.png" alt = "Final Frame before infill."/>
+  <img src="Images/Final_Frame_Before_Infill_Combined.png" alt = "Final Frame before infill."/>
 </p>
 
 > [!IMPORTANT]
@@ -244,7 +250,7 @@ The reason for the empty pixels (the white pixels in the actual images) is due t
 While the Final Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Final Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Science Frames. Below is what a Median Frame looks like.   
 
 <p align="center">
-  <img src="ReadME Images/Median_Frame_Combined.png" alt = "Final Frame before infill."/>
+  <img src="Images/Median_Frame_Combined.png" alt = "Final Frame before infill."/>
 </p>
 
 We can see that the Median Frame has a much more noticeable gradient compared to the actual Science Frames. Furthermore, after taking into consideration the cross-dispersion profile of the CUTE science data, we decided to take a look at the pixel values across a column of the Median Frame. When we did that, we noticed the clear Gaussian distribution in the column traces of the Median Frame. 
@@ -255,13 +261,13 @@ Given this column-wise Gaussian distribution pattern, we decided to use this inf
 > The Gaussian distribution turns into two Gaussian distributions as columns are sampled from left to right in the image. This is due to the de-focus that was experienced between pre-flight and on-orbit testing (Egan et al. 20203).
 
 <p align="center">
-  <img src="ReadME Images/Raw_Column_vs_Median_Column_Traces.png" alt = "Final Frame before infill."/>
+  <img src="Images/Raw_Column_vs_Median_Column_Traces.png" alt = "Final Frame before infill."/>
 </p>
 
 Below is a gif that shows what the Median Frame Fits look like for every bin of columns. 
 
 <p align="center">
-  <img src="ReadME Images/Median_Fits.gif" alt = "Final Frame before infill."/>
+  <img src="Images/Median_Fits.gif" alt = "Final Frame before infill."/>
 </p>
 
 While, in practice, this should be enough to infill those empty pixels, we decided to be even more precise with the infilling process.
@@ -275,7 +281,7 @@ We forced the fits of the Final Frames to have the ratio of the two peaks be the
 Below is what the Final Frame Fits look like.
 
 <p align="center">
-  <img src="ReadME Images/Final_Fits_GIF.gif" alt = "Final Frame before infill."/>
+  <img src="Images/Final_Fits_GIF.gif" alt = "Final Frame before infill."/>
 </p>
 
 At this point of the pipeline, it was a good time to stop and use the Final Frame Fits to infill the Final Frames.
@@ -290,7 +296,7 @@ With the help of the Final Frame Fits, it was easy to determine which pixel valu
 We decided to infill all of the pixels that had a pixel value lower than 0 (due to an outlier proxy pixel value or an over-subtraction that occurred in the Final Frame creation process) and that were empty (due to poor downlinking). Below is what a Final Frame looks like after being infilled.
 
 <p align="center">
-  <img src="ReadME Images/Final_Frame_After_Infill.png" alt = "Final Frame before infill."/>
+  <img src="Images/Final_Frame_After_Infill.png" alt = "Final Frame before infill."/>
 </p>
 
 We can see how much better the Final Frames look like after this infill. However, there was an underlying issue that was apparent in all of the Final Frames: cosmic rays.
@@ -298,7 +304,7 @@ We can see how much better the Final Frames look like after this infill. However
 So far, the pipeline had not concerned itself with cosmic rays. However, now that we had a Final Frame with a value for every pixel, we could take care of the cosmic rays in the image. To do this, we decided to use the [lacosmic](https://pypi.org/project/lacosmic/) Python library. This algorithm not only cleared the image of any cosmic rays, but it also got rid of any possible outliers the pipeline might have caused. For this reason, this step was the last step of the pipeline, giving Final Frames that look like the one below. 
 
 <p align="center">
-  <img src="ReadME Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
+  <img src="Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
 </p>
 
 ## Credits
