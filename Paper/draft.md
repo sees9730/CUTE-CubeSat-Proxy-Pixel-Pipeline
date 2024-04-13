@@ -11,7 +11,6 @@ tags:
 authors:
   - name: Sebastian Escobar
     orcid: 0009-0003-3830-6945
-    equal-contrib: true
     affiliation: "1, 2" 
   - name: Arika Egan
     orcid: 0000-0002-4701-8916
@@ -71,7 +70,7 @@ The last step in the pipeline is to eliminate all of the cosmic rays that might 
 
 ![Flowchart of the pipeline's structure. \label{fig:Flowchart}](../Images/Flowchart.png)
 
-The flow and steps of the pipeline are shown in Figure \autoref{fig:Flowchart}. Furthermore, the pipeline is able to return results like the one in Figure \autoref{fig:Final Results}.
+The flow and steps of the pipeline are shown in \autoref{fig:Flowchart}. Furthermore, the pipeline is able to return results like the one in \autoref{fig:Final Results}.
 
 ![Final Frame Compared to a Science Frame. \label{fig:Final Results}](../Images/Overview_Results.png)
 
