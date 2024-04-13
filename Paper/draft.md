@@ -42,7 +42,7 @@ bibliography: draft.bib
 # Summary
 The CUTE CubeSat mission captures near ultraviolet (NUV) spectral images from various exoplanets as it orbits Earth. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc., which can often be challenging to account for. The `CUTE CubeSat Proxy Pixel Pipeline` was developed specifically to address the challenge of background noise in the spectral images of the exoplanets observed by CUTE. 
 
-The process involves finding "Proxy Pixel Matches" (pixels with similar behaviors across every image) to predict the behavior of the percentage of a pixel value that is noise-induced. Further polishing of the images is done by infilling the images based on certain patterns seen in the images (Gaussian Fitting) as well as eliminating the cosmic rays that infiltrate the image (done with the Python package lacosmic [@2001PASP..113.1420V]).  
+The process involves finding "Proxy Pixel Matches" (pixels with similar behaviors across every image) to predict the behavior of the percentage of a pixel value that is noise-induced. Further polishing of the images is done by infilling the images based on certain patterns seen in the images (Gaussian Fitting) as well as eliminating the cosmic rays that infiltrate the image (done with the Python package lacosmic [@2001PASP;113.1420V]).  
 
 The methodology incorporates both parallel and sequential computing techniques to optimize processing time and efficiency. The pipeline is made up of five files to facilitate debugging and there are example inputs and outputs that serve as a guide to compare the results to.
 
@@ -50,7 +50,7 @@ The methodology incorporates both parallel and sequential computing techniques t
 
 The Colorado Ultraviolet Transit Experiment (CUTE) is a 6U NASA CubeSat built by the Laboratory for Atmospheric and Space Physics (LASP). Its primary mission is to observe and take images of the evolving atmospheres on short-period exoplanets for which it utilizes its Near UltraViolet (NUV) wavelength telescope. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc. [@Egan_2023]. 
 
-Multiple attempts have been made to try and eliminate the background from the images taken by CUTE, most notably the "The Autonomous Data Reduction Pipeline for the CUTE Mission" @[Sreejith_2022]. While this pipeline has the same overall objective, the main differences between it and the pipeline being presented [INFILL HERE]
+Multiple attempts have been made to try and eliminate the background from the images taken by CUTE, most notably the "The Autonomous Data Reduction Pipeline for the CUTE Mission" [@Sreejith_2022]. While this pipeline has the same overall objective, the main differences between it and the pipeline being presented [INFILL HERE]
 
 Various predictive algorithms and strategies were explored before arriving at this solution, most notably Gaussian Process Regression, and image-infilling techniques. The Gaussian Process Regression efforts proved unsuccessful due to the nature of the problem, while the image-infilling techniques provided insufficient reliability due to their neighboring pixel-based approach. The final result combines both solutions while tweaking each. 
 
