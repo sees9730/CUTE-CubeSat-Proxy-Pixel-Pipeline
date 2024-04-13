@@ -8,7 +8,7 @@ tags:
   - milky way
 authors:
   - name: Adrian M. Price-Whelan
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0000-0000-0001
     equal-contrib: true
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
   - name: Author Without ORCID
