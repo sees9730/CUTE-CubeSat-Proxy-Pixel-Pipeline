@@ -6,7 +6,7 @@ tags:
   - exoplanets
   - algorithms
   - image processing
-  - pipepline
+  - pipeline
 
 authors:
   - name: Sebastian Escobar
@@ -33,10 +33,11 @@ affiliations:
 date: 11 April 2024
 
 bibliography: draft.bib
+
 ---
 
 # Summary
-The CUTE CubeSat mission captures near ultraviolet (NUV) spectral images from various exoplanets as it orbits Earth. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc., which can often be challenging to account for. The `CUTE CubeSat Proxy Pixel Pipeline` was developed specifically to address the challenge of background noise in the spectral images of the exoplanets observed by CUTE. 
+The CUTE CubeSat mission captures near ultraviolet (NUV) spectral images from various exoplanets as it orbits Earth. These images often suffer from significant background noise due to environmental factors such as detector temperature, scattered light, spacecraft jitter, etc., which can often be challenging to account for. The `CUTE CubeSat Proxy Pixel Pipeline` was developed specifically to address the challenge of background noise in the spectral images of the exoplanets observed by CUTE. 
 
 The process involves finding "Proxy Pixel Matches" (pixels with similar behaviors across every image) to predict the behavior of the percentage of a pixel value that is noise-induced. Further polishing of the images is done by infilling the images based on certain patterns seen in the images (Gaussian Fitting) as well as eliminating the cosmic rays that infiltrate the image (done with the Python package lacosmic [@lacosmic]).  
 
@@ -44,7 +45,7 @@ The methodology incorporates both parallel and sequential computing techniques t
 
 # Statement of need
 
-The Colorado Ultraviolet Transit Experiment (CUTE) is a 6U NASA CubeSat built by the Laboratory for Atmospheric and Space Physics (LASP). Its primary mission is to observe and take images of the evolving atmospheres on short-period exoplanets for which it utilizes its Near UltraViolet (NUV) wavelength telescope. These images often suffer from significant background noise due to environmental factors like detector temperature, scattered light, spacecraft jitter, etc. [@Egan_2023]. 
+The Colorado Ultraviolet Transit Experiment (CUTE) is a 6U NASA CubeSat built by the Laboratory for Atmospheric and Space Physics (LASP). Its primary mission is to observe and take images of the evolving atmospheres on short-period exoplanets for which it utilizes its Near UltraViolet (NUV) wavelength telescope. These images often suffer from significant background noise due to environmental factors such as detector temperature, scattered light, spacecraft jitter, etc. [@Egan_2023]. 
 
 Multiple attempts have been made to try and eliminate the background from the images taken by CUTE, most notably the "The Autonomous Data Reduction Pipeline for the CUTE Mission" [@Sreejith_2022]. While this pipeline has the same overall objective, the main differences between it and the pipeline being presented [INFILL HERE]
 
@@ -54,7 +55,7 @@ While the CUTE CubeSat Proxy Pixel Pipeline was initially intended to process th
 
 
 # Main Structure and Methodology
-The pipeline is centered around the idea of finding Proxy Pixels in the Dark Frames to then use them to subtract the background noise from Science Frames. To continue the discussion, we present the definition of the three terms. 
+The pipeline is centered around the idea of finding Proxy Pixels in the Dark Frames to then use to subtract the background noise from Science Frames. To continue the discussion, we present the definition of four terms. 
 
 - Dark Frames are images that were taken while the charged coupled device (CCD) was pointed at the void of space.
 
@@ -62,11 +63,13 @@ The pipeline is centered around the idea of finding Proxy Pixels in the Dark Fra
 
 - Proxy Pixels are pixels that exhibit similar behavior throughout multiple pictures.
 
-First, we find Proxy Pixel Matches by looking at the Dark Frames. Since the Dark Frames are meant to characterize and expose the general background noise of the CCD's pixels, we can use the Proxy Pixel Matches to predict the overall noise value that a pixel might have in a Science Frame. As a side note, some of the pixels are taken out of the equation due to the fact that they always show the same value (we call these "Hot Pixels"). Furthermore, since the downlinking capabilities of the CUTE CubeSat are quite limited, we are often forced to downlink ~95% of an image instead of the full image. Regardless, we create "Background Frames" by utilizing the Proxy Pixel Matches to subtract the Background Frames from the Science Frames. 
+- Spectral Pixels are pixels that are spatially located in the center diagonal of Science Frames (where the spectral signal falls).
+
+First, we find Proxy Pixel Matches for every Spectral Pixel with a non-Specral Pixel in Dark Frames. These non-Specral Pixels have values in the Science frames that are not superimposed with any spectral signal, so we consider this the pure noise of the Science Frame. A Spectral Pixel will have its non-Spectral Proxy Pixel's Science Frame value subtracted out from it. This effectively subtracts out the background noise (the thought process being, if those pixels had similar noise levels in Dark Frames, they must also have similar noise levels in Science Frames). As a side note, some of the pixels are taken out of the equation due to the fact that they always show the same value (we call these "Hot Pixels"). Furthermore, since the downlinking capabilities of the CUTE CubeSat are quite limited, we are often forced to downlink ~95% of an image instead of the full image. Regardless, we create "Background Frames" by utilizing the Proxy Pixel Matches to subtract the Background Frames from the Science Frames. 
 
 Once the background-corrected Science Frames (Final Frames) are created, there is still the issue of hot and non-downlinked pixels. To account for these empty pixels, we implement an infilling technique that takes into account the general (based on a "Median Frame") and the local (from the patterns in the Final Frames themselves) expected pixel value. 
 
-The last step in the pipeline is to eliminate all of the cosmic rays that might have infiltrated the image as well as smooth the imperfections generated by the pipeline. This is done with the Python package lacosmic.
+The last step in the pipeline is to eliminate all of the cosmic rays that might have infiltrated the image, as well as smooth the imperfections generated by the pipeline. This is done with the Python package lacosmic.
 
 ![Flowchart of the pipeline's structure. \label{fig:Flowchart}](../Images/Flowchart.png)
 
