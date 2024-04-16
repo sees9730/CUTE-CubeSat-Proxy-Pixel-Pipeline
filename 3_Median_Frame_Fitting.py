@@ -2,12 +2,12 @@ import numpy as np
 from scipy.optimize import curve_fit
 from Helper_Function.Helper import readPickleFile, outputPickleFile, doubleGaussCurve
 
-# Get all the final-science-minus-recreated-background frames from the pickle file 
-frames_data = readPickleFile('Results/WASP189b_Final_Frames_Pre_Infill_v5.pbz2')
-frames = frames_data['Final Frames']
+# Get all the fixed-science-minus-recreated-background frames from the pickle file 
+frames_data = readPickleFile('Results/WASP189b_Fixed_Frames_Pre_Infill_v5.pbz2')
+frames = frames_data['Fixed Frames']
 
 # Create a median master frame where each pixel is the median value
-# of all the recreated-background-subtracted frames
+# of all the fixed-background-subtracted frames
 med_frame = np.nanmedian(frames, axis = 0)
 
 # Create an array where each index corresponds to the pixel pixels in the corresponding column 
