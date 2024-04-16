@@ -57,9 +57,9 @@ def filterAndFitToCurve(x_data, median, big_params, n):
 
     return good_fit, good_params, col
 
-# Get the final science-minus-recreated-background frames from the pickle file
-frames_data = readPickleFile('Results/WASP189b_Final_Frames_Pre_Infill_v5.pbz2')
-frames = frames_data['Final Frames']
+# Get the fixed science-minus-recreated-background frames from the pickle file
+frames_data = readPickleFile('Results/WASP189b_Fixed_Frames_Pre_Infill_v5.pbz2')
+frames = frames_data['Fixed Frames']
 
 # Get the best fit parameters for the median frame from the best fit pickle file
 fits_data = readPickleFile('Results/WASP189b_Median_Fits_v5.pbz2')
@@ -92,7 +92,7 @@ for id, frame in enumerate(frames):
 
     fits.append(new_fits)
 
-data = {'Info': f'Fits and parameters of fits for each median curve trace across the rows of the final frames with {x} columns per bin for visit 5 of WASP189b.', 
+data = {'Info': f'Fits and parameters of fits for each median curve trace across the rows of the fixed frames with {x} columns per bin for visit 5 of WASP189b.', 
         'Fits': fits}
 
-outputPickleFile(data = data, filename = 'Results/WASP189b_Final_Frames_Fits_v5')
+outputPickleFile(data = data, filename = 'Results/WASP189b_Fixed_Frames_Fits_v5')
