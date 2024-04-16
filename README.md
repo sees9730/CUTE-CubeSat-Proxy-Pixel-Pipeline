@@ -47,9 +47,9 @@ To tackle this issue, we created this pipeline which is composed of 5 steps:
    - Given the patterns in the pixels, we create a Background Frame and then subtract it from the Science Frame, giving the resulting Final Frames
 3. [Median Frame Gaussian Fitting](#Median-Frame-Gaussian-Fitting) (Code : [3_Median_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/3_Median_Frame_Fitting.py))
    - We created a Median Frame from the Science Frames and fit multiple Gauss curve fits to its columns
-4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code : [4_Final_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/4_Final_Frame_Fitting.py))
+4. [Final Frames Gaussian Fitting](#Final-Frames-Gaussian-Fitting) (Code : [4_Fixed_Frame_Fitting.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/4_Fixed_Frame_Fitting.py))
    - Given the Final Frames, we fit multiple Gauss curve fits to their columns with the help of the Median Frame Fits
-5. [Infill Final Frames](#Infill-Final-Frames) (Code : [5_Infill_Final_Frames.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/5_Infill_Final_Frames.py))
+5. [Infill Final Frames](#Infill-Final-Frames) (Code : [5_Create_Final_Frames.py](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/5_Create_Final_Frames.py))
    - We use the Final Frame fits to infill the Final Frames and we then remove the cosmic rays using lacosmic  
 
 See below for a comprehensive flowchart that shows which steps are included in which code files.
@@ -66,11 +66,11 @@ flowchart TD;
     subgraph 3_Median_Frame_Fitting.py
     D --> F[Median Frame Fits]
     end
-    subgraph 4_Final_Frame_Fitting.py
+    subgraph 4_Fixed_Frame_Fitting.py
     E & F --> G[Final Frames Fits];
     end
     E & G --> H[Final Frames, Infilled];
-    subgraph 5_Infill_Final_Frames.py
+    subgraph 5_Create_Final_Frames.py
     H --> I[Cosmic Ray Removal]
     I --> J[Final Frames];
     end
@@ -103,12 +103,12 @@ mpiexec -n 4 py .\2_Frame_Creations.py
 
 ## Sequential Computing Files
 
-You can/should run `3_Median_Frame_Fitting.py`, `4_Final_Frame_Fitting.py`, and `5_Infill_Final_Frames.py` like you would any other Python file i.e.
+You can/should run `3_Median_Frame_Fitting.py`, `4_Fixed_Frame_Fitting.py`, and `5_Create_Final_Frames.py` like you would any other Python file i.e.
 
 ```
 py .\3_Median_Frame_Fitting.py
-py .\4_Final_Frame_Fitting.py
-py .\5_Infill_Final_Frames.py
+py .\4_Fixed_Frame_Fitting.py
+py .\5_Create_Final_Frames.py
 ```
 
 ## Libraries
@@ -141,7 +141,7 @@ The code is hardcoded to clean up the Science Frames that were taken of the exop
 > [!IMPORTANT]
 > The pipeline is hard-coded to fix the Science Frames from Visit 5. 
 
-Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Infill_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
+Each of the 5 files outputs a .pbz2 file that is then used in the successive file as shown in the flowchart in the Overview section. The final code (5_Create_Final_Frames.py) outputs a .pbz2 that contains the final images and results of the pipeline. These images can be visualized using the plot function in the [Helper Function](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/blob/master/Helper_Function/Helper.py).
 
 > [!NOTE]
 > The results shown in the readME are the ones provided in the [Results folder](https://github.com/sees9730/CUTE-CubeSat-Proxy-Pixel-Pipeline/tree/master/Results). 

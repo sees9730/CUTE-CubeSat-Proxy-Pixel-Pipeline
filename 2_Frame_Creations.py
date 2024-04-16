@@ -72,8 +72,8 @@ for i in range(frames_per_node[rank][0], frames_per_node[rank][0] + len(frames_p
     # Every node will create 'frames_per_node' amount of frames
     background_images.append(bck_im)
 
-# Create the final images by subtracting the newly created background image from the original science image
-final_ims = []
+# Create the fixed images by subtracting the newly created background image from the original science image
+fixed_ims = []
 
 # Index the original science frames to create the equivalent background frames
 sc_ims_visit = sc_ful_frms[128:189] # Visit 5 indices 
@@ -82,21 +82,21 @@ sc_ims_visit = sc_ful_frms[128:189] # Visit 5 indices
 sc_ims_per_rank = np.array_split(sc_ims_visit, size)
 sc_ims_rank = sc_ims_per_rank[rank]
 
-# Create the final-background-subtracted images
+# Create the fixed-background-subtracted images
 for i in range(len(background_images)):
 
-    # Create the empty canvas for the final images
-    final_im = np.zeros_like(sc_ful_frms[0])
+    # Create the empty canvas for the fixed images
+    fixed_im = np.zeros_like(sc_ful_frms[0])
 
     # Go through every pixel tag and replace the pixel with the science value - the background value
     for tag in spec_tags:
         x, y = decoder(tag, 2048)
-        final_im[y, x] = sc_ims_rank[i][y, x] - background_images[i][y, x]
+        fixed_im[y, x] = sc_ims_rank[i][y, x] - background_images[i][y, x]
 
-    final_ims.append(final_im)
+    fixed_ims.append(fixed_im)
 
 # Package the output of every single node to send it to the root node
-out = [final_ims, background_images, rank]
+out = [fixed_ims, background_images, rank]
 
 # Gather all the output arrays to the root node
 gathered = comm.gather(out, root = 0)
@@ -104,13 +104,13 @@ gathered = comm.gather(out, root = 0)
 # Have the root node output the final file
 if rank == 0:
     # Processed the gathered data
-    frames = [final_frame for frames_per_node in gathered for final_frame in frames_per_node[0]]
-    back_ims = [final_frame for frames_per_node in gathered for final_frame in frames_per_node[1]]
+    frames = [fixed_frame for frames_per_node in gathered for fixed_frame in frames_per_node[0]]
+    back_ims = [fixed_frame for frames_per_node in gathered for fixed_frame in frames_per_node[1]]
 
     # Set up the data that will be in the final file
     data = {'Info': 'Includes original science minus recreated background frames and the recreated background frames themselves for visit 5 of WASP189b.',
-            'Final Frames': frames,
+            'Fixed Frames': frames,
             'Background Frames': back_ims}
 
     # Output the pickle file
-    outputPickleFile(data = data, filename = 'Results/WASP189b_Final_Frames_Pre_Infill_v5')
+    outputPickleFile(data = data, filename = 'Results/WASP189b_Fixed_Frames_Pre_Infill_v5')
