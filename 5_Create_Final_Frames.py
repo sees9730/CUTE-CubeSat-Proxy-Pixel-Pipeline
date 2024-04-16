@@ -44,4 +44,4 @@ la_cosmic_mask = []
 cr_removed_frames, la_cosmic_mask = zip(*[lacosmic.lacosmic(data=frame, contrast=2, cr_threshold=6, neighbor_threshold=4, effective_gain=1.5, readnoise=4.5) for frame in final_frames_infilled])
 
 # Save the final frames
-outputPickleFile(cr_removed_frames, 'WASP189b_Final_Frames_v5')
+outputPickleFile(cr_removed_frames, 'Results/WASP189b_Final_Frames_v5')
