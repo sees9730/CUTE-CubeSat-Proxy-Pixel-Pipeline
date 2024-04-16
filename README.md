@@ -61,15 +61,15 @@ flowchart TD;
     end
     subgraph 2_Frame_Creations.py
     B --> C[Background Frames];
-    C & D[Science Frames] --> E[Final Frames, No Infill];
+    C & D[Science Frames] --> E[Fixed Frames, No Infill];
     end
     subgraph 3_Median_Frame_Fitting.py
     D --> F[Median Frame Fits]
     end
     subgraph 4_Fixed_Frame_Fitting.py
-    E & F --> G[Final Frames Fits];
+    E & F --> G[Fixed Frames Fits];
     end
-    E & G --> H[Final Frames, Infilled];
+    E & G --> H[Fixed Frames, Infilled];
     subgraph 5_Create_Final_Frames.py
     H --> I[Cosmic Ray Removal]
     I --> J[Final Frames];
@@ -220,10 +220,10 @@ Since the non-spectral pixels in a Science Frame have no spectral signal in them
 Below is a comprehensive image that showcases the logic behind the Background Frames and Fixed Frames creation.
 
 <p align="center">
-  <img src="Images/Final_And_Background_Frame_Drawing.png" alt = "Drawing that shows how the Background Frame and Final Frames are created"/>
+  <img src="Images/Final_And_Background_Frame_Drawing.png" alt = "Drawing that shows how the Background Frame and Fixed Frames are created"/>
 </p>
 
-Below is what an actual Science, Dark, Background, and Final Frame look like.
+Below is what an actual Science, Dark, Background, and Fixed Frame look like.
 
 <p align="center">
   <img src="Images/Original_Science_Image_Pre_Infill_Combined.png" alt = "Original science image pre infill"/>
@@ -247,7 +247,7 @@ Below is what an actual Science, Dark, Background, and Final Frame look like.
 The reason for the empty pixels (the white pixels in the actual images) is due to the fact that we excluded hot pixels and unavailable pixels from the proxy pixel matching algorithm. Hot pixels are described as pixels that have an abnormally high value throughout every single frame. An unavailable pixel is usually due to a poor frame downlink in which the pixel value was never obtained. 
 
 # Median Frame Gaussian Fitting
-While the Final Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Final Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Science Frames. Below is what a Median Frame looks like.   
+While the Fixed Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Fixed Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Science Frames. Below is what a Median Frame looks like.   
 
 <p align="center">
   <img src="Images/Median_Frame_Combined.png" alt = "Final Frame before infill."/>
@@ -255,7 +255,7 @@ While the Final Frames exist, there is still the issue of the empty pixels that 
 
 We can see that the Median Frame has a much more noticeable gradient compared to the actual Science Frames. Furthermore, after taking into consideration the cross-dispersion profile of the CUTE science data, we decided to take a look at the pixel values across a column of the Median Frame. When we did that, we noticed the clear Gaussian distribution in the column traces of the Median Frame. 
 
-Given this column-wise Gaussian distribution pattern, we decided to use this information to give a value to the empty pixels in the Final Frames. To make the calculations simpler and faster, we chose to group the columns into 'bins'. This way, each 'bin of columns' would contain a specific number of columns from which the Gaussian distributions would be created (we got the median of each pixel value between all the columns in a bin). After getting the Gaussian distribution for every bin of columns, we fit a Gaussian to it. Below is what all of the columns in a bin look like compared to the median curve that is then used to fit the double Gaussian.
+Given this column-wise Gaussian distribution pattern, we decided to use this information to give a value to the empty pixels in the Fixed Frames. To make the calculations simpler and faster, we chose to group the columns into 'bins'. This way, each 'bin of columns' would contain a specific number of columns from which the Gaussian distributions would be created (we got the median of each pixel value between all the columns in a bin). After getting the Gaussian distribution for every bin of columns, we fit a Gaussian to it. Below is what all of the columns in a bin look like compared to the median curve that is then used to fit the double Gaussian.
 
 > [!NOTE]
 > The Gaussian distribution turns into two Gaussian distributions as columns are sampled from left to right in the image. This is due to the de-focus that was experienced between pre-flight and on-orbit testing (Egan et al. 20203).
@@ -272,28 +272,28 @@ Below is a gif that shows what the Median Frame Fits look like for every bin of 
 
 While, in practice, this should be enough to infill those empty pixels, we decided to be even more precise with the infilling process.
 
-# Final Frames Gaussian Fitting
+# Fixed Frames Gaussian Fitting
 
-Having completed the Median Frame Fits, we decided to take a look at the Final Frames and see if this Gaussian distribution pattern is still there; And surely enough, this pattern is still there in the Final Frames. With this information, we thought it was best to not discard the Median Frames Fits, but instead use them to influence the creation of the `Final Frame Fits`. This was done to try to account for time-and-spatial dependent factors that might be missing in the Median Frame. 
+Having completed the Median Frame Fits, we decided to take a look at the Fixed Frames and see if this Gaussian distribution pattern is still there; And surely enough, this pattern is still there in the Fixed Frames. With this information, we thought it was best to not discard the Median Frames Fits, but instead, use them to influence the creation of the `Fixed Frame Fits`. This was done to try to account for time-and-spatial dependent factors that might be missing in the Median Frame. 
 
-We forced the fits of the Final Frames to have the ratio of the two peaks be the same as the Median Frame Fits for every bin of columns. Everything else is the same as the corresponding bin of columns from the Median Frame.
+We forced the fits of the Fixed Frames to have the ratio of the two peaks be the same as the Median Frame Fits for every bin of columns. Everything else is the same as the corresponding bin of columns from the Median Frame.
 
-Below is what the Final Frame Fits look like.
+Below is what the Fixed Frame Fits look like.
 
 <p align="center">
   <img src="Images/Final_Fits_GIF.gif" alt = "Final Frame before infill."/>
 </p>
 
-At this point of the pipeline, it was a good time to stop and use the Final Frame Fits to infill the Final Frames.
+At this point of the pipeline, it was a good time to stop and use the Fixed Frame Fits to infill the Fixed Frames.
 
 > [!NOTE]
-> The reason we decided to include 25 columns per bin in the code is because this binning provides sufficient spectral resolution to achieve CUTE's primary science objectives of isolating individual spectral features.
+> The reason we decided to include 25 columns per bin in the code is that this binning provides sufficient spectral resolution to achieve CUTE's primary science objectives of isolating individual spectral features.
 
-# Infill Final Frames
+# Infill Fixed Frames
 
-With the help of the Final Frame Fits, it was easy to determine which pixel value corresponded to which in the Final Frames. Since every Final Frame has a specific Final Frame Fit, we looked at the x and y positions of the pixels and grabbed the values from the specific final frame fits that corresponded to those pixels. 
+With the help of the Fixed Frame Fits, it was easy to determine which pixel value corresponded to which in the Fixed Frames. Since every Fixed Frame has a specific Fixed Frame Fit, we looked at the x and y positions of the pixels and grabbed the values from the specific fixed frame fits that corresponded to those pixels. 
 
-We decided to infill all of the pixels that had a pixel value lower than 0 (due to an outlier proxy pixel value or an over-subtraction that occurred in the Final Frame creation process) and that were empty (due to poor downlinking). Below is what a Final Frame looks like after being infilled.
+We decided to infill all of the pixels that had a pixel value lower than 0 (due to an outlier proxy pixel value or an over-subtraction that occurred in the Fixed Frame creation process) and that were empty (due to poor downlinking). Below is what a Fixed Frame looks like after being infilled.
 
 <p align="center">
   <img src="Images/Final_Frame_After_Infill.png" alt = "Final Frame before infill."/>
@@ -301,7 +301,7 @@ We decided to infill all of the pixels that had a pixel value lower than 0 (due 
 
 We can see how much better the Final Frames look like after this infill. However, there was an underlying issue that was apparent in all of the Final Frames: cosmic rays.
 
-So far, the pipeline had not concerned itself with cosmic rays. However, now that we had a Final Frame with a value for every pixel, we could take care of the cosmic rays in the image. To do this, we decided to use the [lacosmic](https://pypi.org/project/lacosmic/) Python library. This algorithm not only cleared the image of any cosmic rays, but it also got rid of any possible outliers the pipeline might have caused. For this reason, this step was the last step of the pipeline, giving Final Frames that look like the one below. 
+So far, the pipeline had not concerned itself with cosmic rays. However, now that we had a Final Frame with a value for every pixel, we could take care of the cosmic rays in the image. To do this, we decided to use the [lacosmic](https://pypi.org/project/lacosmic/) Python library. This algorithm not only cleared the image of any cosmic rays, but it also got rid of any possible outliers the pipeline might have caused. For this reason, this step was the last step of the pipeline, giving Final Frames that look like the one below.
 
 <p align="center">
   <img src="Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
