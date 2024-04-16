@@ -24,8 +24,8 @@ In short, the pipeline turns an image like the one on the left, to one that look
     - [LSQ Method](#lsq-method)
 - [Frames Creation](#frames-creation)
 - [Median Frame Gaussian Fitting](#median-frame-gaussian-fitting)
-- [Final Frames Gaussian Fitting](#final-frames-gaussian-fitting)
-- [Infill Final Frames](#infill-final-frames)
+- [Fixed Frames Gaussian Fitting](#fixed-frames-gaussian-fitting)
+- [Infill Fixed Frames](#infill-fixed-frames)
 - [Credits](#credits)
 
 # Overview
