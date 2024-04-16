@@ -23,10 +23,10 @@ In short, the pipeline turns an image like the one on the left, to one that look
     - [Median Method](#median-method)
     - [LSQ Method](#lsq-method)
 - [Frames Creation](#frames-creation)
-  - [Median Frame Gaussian Fitting](#median-frame-gaussian-fitting)
-  - [Final Frames Gaussian Fitting](#final-frames-gaussian-fitting)
-  - [Infill Final Frames](#infill-final-frames)
-  - [Credits](#credits)
+- [Median Frame Gaussian Fitting](#median-frame-gaussian-fitting)
+- [Final Frames Gaussian Fitting](#final-frames-gaussian-fitting)
+- [Infill Final Frames](#infill-final-frames)
+- [Credits](#credits)
 
 # Overview
 
@@ -215,9 +215,9 @@ Since the Dark Frames are stills of an arbitrary point in the night sky, we can 
 1. Create an empty canvas with the same shape as a Science Frame
 2. To fill in the Background Frame, consider a single proxy pixel match. We take the non-spectral pixel value of the proxy match in a Science Frame and then place its value in the position of the spectral pixel in the Background Frame. Then repeat this until every single spectral pixel in the Background Frame has its proxy pixel value in it.
 
-Since the non-spectral pixels in a Science Frame have no spectral signal in them, their value is ideally the same when compared to it in a Dark Frame. We create the Background Frame this way so that the underlying dark noise value of the spectral pixel (which is the value of its non-spectral pixel proxy match), can be subtracted from the spectral pixel value in the Science Frame. The final result is called the `Final Frame`.
+Since the non-spectral pixels in a Science Frame have no spectral signal in them, their value is ideally the same when compared to it in a Dark Frame. We create the Background Frame this way so that the underlying dark noise value of the spectral pixel (which is the value of its non-spectral pixel proxy match), can be subtracted from the spectral pixel value in the Science Frame. The final result is called the `Fixed Frame`.
 
-Below is a comprehensive image that showcases the logic behind the Background Frames and Final Frames creation.
+Below is a comprehensive image that showcases the logic behind the Background Frames and Fixed Frames creation.
 
 <p align="center">
   <img src="Images/Final_And_Background_Frame_Drawing.png" alt = "Drawing that shows how the Background Frame and Final Frames are created"/>
@@ -246,7 +246,7 @@ Below is what an actual Science, Dark, Background, and Final Frame look like.
 
 The reason for the empty pixels (the white pixels in the actual images) is due to the fact that we excluded hot pixels and unavailable pixels from the proxy pixel matching algorithm. Hot pixels are described as pixels that have an abnormally high value throughout every single frame. An unavailable pixel is usually due to a poor frame downlink in which the pixel value was never obtained. 
 
-## Median Frame Gaussian Fitting
+# Median Frame Gaussian Fitting
 While the Final Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Final Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Science Frames. Below is what a Median Frame looks like.   
 
 <p align="center">
@@ -272,7 +272,7 @@ Below is a gif that shows what the Median Frame Fits look like for every bin of 
 
 While, in practice, this should be enough to infill those empty pixels, we decided to be even more precise with the infilling process.
 
-## Final Frames Gaussian Fitting
+# Final Frames Gaussian Fitting
 
 Having completed the Median Frame Fits, we decided to take a look at the Final Frames and see if this Gaussian distribution pattern is still there; And surely enough, this pattern is still there in the Final Frames. With this information, we thought it was best to not discard the Median Frames Fits, but instead use them to influence the creation of the `Final Frame Fits`. This was done to try to account for time-and-spatial dependent factors that might be missing in the Median Frame. 
 
@@ -289,7 +289,7 @@ At this point of the pipeline, it was a good time to stop and use the Final Fram
 > [!NOTE]
 > The reason we decided to include 25 columns per bin in the code is because this binning provides sufficient spectral resolution to achieve CUTE's primary science objectives of isolating individual spectral features.
 
-## Infill Final Frames
+# Infill Final Frames
 
 With the help of the Final Frame Fits, it was easy to determine which pixel value corresponded to which in the Final Frames. Since every Final Frame has a specific Final Frame Fit, we looked at the x and y positions of the pixels and grabbed the values from the specific final frame fits that corresponded to those pixels. 
 
@@ -307,6 +307,6 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
   <img src="Images/Final_Frame_After_Infill_And_CR_Removal.png" alt = "Final Frame before infill."/>
 </p>
 
-## Credits
+# Credits
 - Created by: [Sebastian Escobar](https://www.linkedin.com/in/sebastianescobar03/)
 - With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
