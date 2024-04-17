@@ -61,10 +61,10 @@ flowchart TD;
     end
     subgraph 2_Frame_Creations.py
     B --> C[Background Frames];
-     D[Science Frames] & C --> E[Fixed Frames, No Infill];
+    D[Science Frames] & C --> E[Fixed Frames, No Infill];
     end
     subgraph 3_Median_Frame_Fitting.py
-    C --> F[Median Frame Fits]
+    E --> F[Median Frame Fits]
     end
     subgraph 4_Fixed_Frame_Fitting.py
     E & F --> G[Fixed Frames Fits];
