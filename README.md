@@ -247,7 +247,7 @@ Below is what an actual Science, Dark, Background, and Fixed Frame look like.
 The reason for the empty pixels (the white pixels in the actual images) is due to the fact that we excluded hot pixels and unavailable pixels from the proxy pixel matching algorithm. Hot pixels are described as pixels that have an abnormally high value throughout every single frame. An unavailable pixel is usually due to a poor frame downlink in which the pixel value was never obtained. 
 
 # Median Frame Gaussian Fitting
-While the Fixed Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Fixed Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Science Frames. Below is what a Median Frame looks like.   
+While the Fixed Frames exist, there is still the issue of the empty pixels that needs to be dealt with. To fix this, we decided to create a `Median Frame` from which we could extract some information to infill the Fixed Frames. The Median Frame was created by taking the median pixel value of every pixel throughout all the Fixed Frames. Below is what a Median Frame looks like.   
 
 <p align="center">
   <img src="Images/Median_Frame_Combined.png" alt = "Final Frame before infill."/>
@@ -258,7 +258,7 @@ We can see that the Median Frame has a much more noticeable gradient compared to
 Given this column-wise Gaussian distribution pattern, we decided to use this information to give a value to the empty pixels in the Fixed Frames. To make the calculations simpler and faster, we chose to group the columns into 'bins'. This way, each 'bin of columns' would contain a specific number of columns from which the Gaussian distributions would be created (we got the median of each pixel value between all the columns in a bin). After getting the Gaussian distribution for every bin of columns, we fit a Gaussian to it. Below is what all of the columns in a bin look like compared to the median curve that is then used to fit the double Gaussian.
 
 > [!NOTE]
-> The Gaussian distribution turns into two Gaussian distributions as columns are sampled from left to right in the image. This is due to the de-focus that was experienced between pre-flight and on-orbit testing (Egan et al. 20203).
+> The Gaussian distribution turns into two Gaussian distributions as columns are sampled from left to right in the image. This is due to the de-focus that was experienced between pre-flight and on-orbit testing (Egan et al. 2023).
 
 <p align="center">
   <img src="Images/Raw_Column_vs_Median_Column_Traces.png" alt = "Final Frame before infill."/>
