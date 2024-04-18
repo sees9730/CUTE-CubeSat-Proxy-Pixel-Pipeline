@@ -274,7 +274,7 @@ While, in practice, this should be enough to infill those empty pixels, we decid
 
 # Fixed Frames Gaussian Fitting
 
-Having completed the Median Frame Fits, we decided to take a look at the Fixed Frames and see if this Gaussian distribution pattern is still there; And surely enough, this pattern is still there in the Fixed Frames. With this information, we thought it was best to not discard the Median Frames Fits, but instead, use them to influence the creation of the `Fixed Frame Fits`. This was done to try to account for time-and-spatial dependent factors that might be missing in the Median Frame. 
+Having completed the Median Frame Fits, we decided to take another look at the Fixed Frames and see if this Gaussian distribution pattern is still there; And surely enough, this pattern is still there. With this information, we thought it was best not to discard the Median Frames Fits, but instead, use them to influence the creation of the `Fixed Frame Fits`. This was done to try to account for time-and-spatial dependent factors that might be missing in the Median Frame. 
 
 We forced the fits of the Fixed Frames to have the ratio of the two peaks be the same as the Median Frame Fits for every bin of columns. Everything else is the same as the corresponding bin of columns from the Median Frame.
 
