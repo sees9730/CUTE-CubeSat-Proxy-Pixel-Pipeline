@@ -23,7 +23,7 @@ def plot(frame, title = '', vmin = 0, vmax = 200):
     plt.show() # Display
 
 '''
-Fitting Functions 
+Fitting/Optimizing Functions 
 '''
 
 def doubleGaussCurve(xVar, a1, b1, c1, d1, a2, b2, c2, d2):
