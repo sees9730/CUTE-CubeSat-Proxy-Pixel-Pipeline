@@ -37,7 +37,7 @@ affiliations:
 
 date: 11 April 2024
 
-bibliography: draft.bib
+bibliography: bibliography.bib
 
 ---
 
