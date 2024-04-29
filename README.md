@@ -309,4 +309,4 @@ So far, the pipeline had not concerned itself with cosmic rays. However, now tha
 
 # Credits
 - Created by: [Sebastian Escobar](https://www.linkedin.com/in/sebastianescobar03/)
-- With the help of: Arika Egan, Kevin France, and Dolon Bhattacharyya
+- With the help of: Arika Egan, Kevin France, Dolon Bhattacharyya, and A. G. Sreejith.
